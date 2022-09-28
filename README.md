@@ -15,7 +15,7 @@ Compile for GPU:
 ```
 bash /home/user/ompoffload/clang/install/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64
 ```
-Replace '/home/user/ompoffload/clang/install/bin/clang' with path to were your binary is.
+Replace '/home/user/ompoffload/clang/install/bin/clang' with path to where your binary is.
 
 You may receive the following error...
 ```
