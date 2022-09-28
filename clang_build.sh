@@ -1,7 +1,11 @@
 #!/bin/sh
 # Build Clang with support for OpenMP offloading to NVIDIA GPUs.
 
-install_dir=$HOME/offload/clang/install
+WORKING_DIR=$HOME/ompoffload/clang/work
+INSTALL_DIR=$HOME/ompoffload/clang/install
+
+mkdir -p $WORKING_DIR
+cd $WORKING_DIR
 
 # find the latest clang releases here: https://github.com/llvm/llvm-project/releases
 # latest clang-15 release of clang...
@@ -18,7 +22,7 @@ cmake -DLLVM_ENABLE_PROJECTS="clang;openmp" \
       -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
       -DCMAKE_BUILD_TYPE=Release \
       -G "Unix Makefiles" \
-      -DCMAKE_INSTALL_PREFIX=$install_dir \
+      -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
       -DCLANG_OPENMP_NVPTX_DEFAULT_ARCH=sm_75 \
 	-DLIBOMPTARGET_NVPTX_COMPUTE_CAPABILITIES=75 \
       ../llvm
@@ -34,7 +38,7 @@ cmake -DLLVM_ENABLE_PROJECTS="clang;openmp" \
       -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
       -DCMAKE_BUILD_TYPE=Release \
       -G "Unix Makefiles" \
-      -DCMAKE_INSTALL_PREFIX=$install_dir \
+      -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
       -DCLANG_OPENMP_NVPTX_DEFAULT_ARCH=sm_75 \
 	-DLIBOMPTARGET_NVPTX_COMPUTE_CAPABILITIES=75 \
       ../llvm
@@ -43,5 +47,5 @@ make -j$(nproc) install || exit 1
 cd ..
 
 # clean working directory
-cd ..
-rm -rf llvm-project-llvmorg-15.0.1
+cd ../../
+rm -rf $WORKING_DIR
