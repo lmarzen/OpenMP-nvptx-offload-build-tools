@@ -13,7 +13,7 @@ The working directory is not removed by the script, but you can safely delete th
 # clang
 Compile for GPU:
 ```
-bash /home/user/ompoffload/clang/install/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64 -L/home/luke/offload/clang/install/lib
+bash /home/user/ompoffload/clang/install/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64
 ```
 Replace '/home/user/ompoffload/clang/install/bin/clang' with path to were your binary is.
 
