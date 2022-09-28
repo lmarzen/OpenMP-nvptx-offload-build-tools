@@ -47,5 +47,5 @@ make -j$(nproc) install || exit 1
 cd ..
 
 # clean working directory
-cd ../../
-rm -rf $WORKING_DIR
+# cd ../../
+# rm -rf $WORKING_DIR
