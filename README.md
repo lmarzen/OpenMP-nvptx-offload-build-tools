@@ -35,7 +35,7 @@ bash /home/user/ompoffload/bin/clang input.c -fopenmp
 # gcc
 Compile for GPU:
 ```
-export LD_LIBRARY_PATH=/home/luke/offload/gcc/install/lib64
+export LD_LIBRARY_PATH=/home/user/ompoffload/gcc/install/lib64
 bash /home/user/ompoffload/gcc/install/bin/gcc input.c -fopenmp
 ```
 
