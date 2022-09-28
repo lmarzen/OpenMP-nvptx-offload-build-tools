@@ -11,12 +11,12 @@ The working directory is not removed by the script, but you can safely delete th
 
 
 # clang
-Notes about building clang:
+Building clang:
 
 In the build_clang.sh it is important to indicate what architectures you want to compile for. This is indicated with the following flags...
 ```
-  -DCLANG_OPENMP_NVPTX_DEFAULT_ARCH=sm_75
-	-DLIBOMPTARGET_NVPTX_COMPUTE_CAPABILITIES=75
+-DCLANG_OPENMP_NVPTX_DEFAULT_ARCH=sm_75
+-DLIBOMPTARGET_NVPTX_COMPUTE_CAPABILITIES=75
 ```
 Here I used sm_75, but you will need to change this to you GPU architecture. If you are unsure of you gpu architecture here is a resource to that will help you out: https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/.
 
