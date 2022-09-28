@@ -11,7 +11,7 @@ The working directory is not removed by the script, but you can safely delete th
 
 
 # clang
-Building clang:
+Building Clang:
 
 In the build_clang.sh it is important to indicate what architectures you want to compile for. This is indicated with the following flags...
 ```
@@ -42,6 +42,10 @@ bash /home/user/ompoffload/bin/clang input.c -fopenmp
 ```
 
 # gcc
+Building GCC:
+
+Before running the gcc_build.sh check where your cuda toolkit is installed and update the CUDA variable near the top of the script.
+
 Compile for GPU:
 ```
 export LD_LIBRARY_PATH=/home/user/ompoffload/gcc/install/lib64
