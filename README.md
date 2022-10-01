@@ -33,12 +33,12 @@ clang-15: error: linker command failed with exit code 1 (use -v to see invocatio
 ```
 This is fixed by adding an additional flag, -L/home/user/ompoffload/clang/install/lib.
 ```
-bash /home/user/ompoffload/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64 -L/home/user/ompoffload/clang/install/lib
+bash /home/user/ompoffload/clang/install/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64 -L/home/user/ompoffload/clang/install/lib
 ```
 
 Compile for CPU:
 ```
-bash /home/user/ompoffload/bin/clang input.c -fopenmp
+bash /home/user/ompoffload/clang/install/bin/clang input.c -fopenmp
 ```
 
 # gcc
