@@ -22,8 +22,8 @@ cd ..
 
 # set up the GCC source tree
 git clone git://sourceware.org/git/newlib-cygwin.git nvptx-newlib
-# latest gcc-12 release of gcc...
-git clone -b releases/gcc-12 git://gcc.gnu.org/git/gcc.git gcc
+# latest gcc-13 release of gcc...
+git clone -b releases/gcc-13 git://gcc.gnu.org/git/gcc.git gcc
 # latest experimental version of gcc...
 # git clone git://gcc.gnu.org/git/gcc.git gcc
 
