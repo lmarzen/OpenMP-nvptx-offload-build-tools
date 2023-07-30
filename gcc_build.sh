@@ -1,8 +1,8 @@
 #!/bin/sh
 # Build GCC with support for OpenMP offloading to NVIDIA GPUs.
 
-WORKING_DIR=$HOME/ompoffload/gcc/work
-INSTALL_DIR=$HOME/ompoffload/gcc/install
+WORKING_DIR=$HOME/ompoffload/.gcc
+INSTALL_DIR=$HOME/ompoffload/gcc
 
 # location of the installed CUDA toolkit
 CUDA=/opt/cuda
@@ -22,8 +22,8 @@ cd ..
 
 # set up the GCC source tree
 git clone git://sourceware.org/git/newlib-cygwin.git nvptx-newlib
-# latest gcc-12 release of gcc...
-git clone --branch releases/gcc-12 git://gcc.gnu.org/git/gcc.git gcc
+# latest gcc-13 release of gcc...
+git clone -b releases/gcc-13 git://gcc.gnu.org/git/gcc.git gcc
 # latest experimental version of gcc...
 # git clone git://gcc.gnu.org/git/gcc.git gcc
 
@@ -63,5 +63,5 @@ make -j$(nproc) install || exit 1
 cd ..
 
 # clean working directory
-# cd ..
-# rm -rf $WORKING_DIR
+cd ..
+rm -rf $WORKING_DIR
