@@ -22,23 +22,23 @@ Here I used sm_75, but you will need to change this to you GPU architecture. If 
 
 Compile for GPU:
 ```
-/home/user/ompoffload/clang/install/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64
+/home/user/ompoffload/clang/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64
 ```
-Replace '/home/user/ompoffload/clang/install/bin/clang' with path to where your binary is.
+Replace '/home/user/ompoffload/clang/bin/clang' with path to where your binary is.
 
 You may receive the following error...
 ```
-/home/user/ompoffload/clang/install/bin/clang-linker-wrapper: error: 'ld' failed
+/home/user/ompoffload/clang/bin/clang-linker-wrapper: error: 'ld' failed
 clang-15: error: linker command failed with exit code 1 (use -v to see invocation)
 ```
-This is fixed by adding an additional flag, -L/home/user/ompoffload/clang/install/lib.
+This is fixed by adding an additional flag, -L/home/user/ompoffload/clang/lib.
 ```
-/home/user/ompoffload/clang/install/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64 -L/home/user/ompoffload/clang/install/lib
+/home/user/ompoffload/clang/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64 -L/home/user/clang/lib
 ```
 
 Compile for CPU:
 ```
-/home/user/ompoffload/clang/install/bin/clang input.c -fopenmp
+/home/user/ompoffload/clang/bin/clang input.c -fopenmp
 ```
 
 # gcc
@@ -48,12 +48,12 @@ Before running the gcc_build.sh check where your cuda toolkit is installed and u
 
 Compile for GPU:
 ```
-export LD_LIBRARY_PATH=/home/user/ompoffload/gcc/install/lib64
-/home/user/ompoffload/gcc/install/bin/gcc input.c -fopenmp
+export LD_LIBRARY_PATH=/home/user/ompoffload/gcc/lib64
+/home/user/ompoffload/gcc/bin/gcc input.c -fopenmp
 ```
 
 Compile for CPU:
 ```
-/home/user/ompoffload/gcc/install/bin/gcc input.c -fopenmp
+/home/user/ompoffload/gcc/bin/gcc input.c -fopenmp
 ```
 
