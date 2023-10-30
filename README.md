@@ -33,12 +33,25 @@ clang-15: error: linker command failed with exit code 1 (use -v to see invocatio
 ```
 This is fixed by adding an additional flag, -L/home/user/ompoffload/clang/lib.
 ```
-/home/user/ompoffload/clang/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64 -L/home/user/clang/lib
+/home/user/ompoffload/clang/bin/clang input.c -fopenmp -fopenmp-targets=nvptx64 -L/home/user/ompoffload/clang/lib
+```
+To avoid specifying these paths repetitevly add the following lines to the end of your `~/.bashrc`.
+```
+PATH=/home/user/ompoffload/clang/bin/clang/bin:$PATH
+LD_LIBRARY_PATH=/home/user/ompoffload/clang/lib:$LD_LIBRARY_PATH
+```
+Then re-source your `.bashrc` with
+```
+source ~/.bashrc
+```
+Now you can compile as follows for GPU,
+```
+clang input.c -fopenmp -fopenmp-targets=nvptx64
 ```
 
 Compile for CPU:
 ```
-/home/user/ompoffload/clang/bin/clang input.c -fopenmp
+clang input.c -fopenmp
 ```
 
 # gcc
