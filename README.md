@@ -1,5 +1,5 @@
 # OpenMP-nvptx-offload-build-tools
-Build scripts for compiling gcc(12.2.1) and clang(15.0.1) with OpenMP offload support for Nvidia GPUs.
+Build scripts for compiling gcc(12.2.1) and clang(18) with OpenMP offload support for Nvidia GPUs.
 
 gcc and clang will be built then installed in $HOME/ompoffload/gcc/install and $HOME/ompoffload/clang/install respectively.
 

@@ -1,15 +1,15 @@
 #!/bin/sh
-# Build Clang with support for OpenMP offloading to NVIDIA GPUs.
+# Build Clang with support for OpenMP offloading to NVIDIA and AMD GPUs.
 
-WORKING_DIR=$HOME/ompoffload/.clang
-INSTALL_DIR=$HOME/ompoffload/clang
+WORKING_DIR=$HOME/ompoffload/.llvm18
+INSTALL_DIR=$HOME/ompoffload/llvm18
 
 mkdir -p $WORKING_DIR
 cd $WORKING_DIR
 
 # find the latest clang releases here: https://github.com/llvm/llvm-project/releases
-# latest clang-16 release of clang...
-git clone -b release/16.x https://github.com/llvm/llvm-project.git
+# latest clang-18 release of clang...
+git clone -b release/18.x --depth 1 https://github.com/llvm/llvm-project.git
 cd llvm-project
 
 # specific release of clang
@@ -24,13 +24,13 @@ cd llvm-project
 
 mkdir build
 cd build
-cmake -DLLVM_ENABLE_PROJECTS="clang;openmp" \
-      -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
+cmake -DLLVM_ENABLE_PROJECTS="clang;lld;openmp" \
+      -DLLVM_TARGETS_TO_BUILD="host;AMDGPU;NVPTX" \
       -DCMAKE_BUILD_TYPE=Release \
       -G "Unix Makefiles" \
       -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
-      -DCLANG_OPENMP_NVPTX_DEFAULT_ARCH=sm_75 \
-      -DLIBOMPTARGET_NVPTX_COMPUTE_CAPABILITIES=75 \
+      -DLIBOMPTARGET_DEVICE_ARCHITECTURES="all" \
+      -DLIBOMPTARGET_ENABLE_DEBUG=0 \
       ../llvm
 make -j$(nproc) || exit 1
 cd ..
@@ -40,13 +40,13 @@ mkdir build2
 cd build2
 CC=../build/bin/clang \
 CXX=../build/bin/clang++ \
-cmake -DLLVM_ENABLE_PROJECTS="clang;openmp" \
-      -DLLVM_TARGETS_TO_BUILD="X86;NVPTX" \
+cmake -DLLVM_ENABLE_PROJECTS="clang;lld;openmp" \
+      -DLLVM_TARGETS_TO_BUILD="host;AMDGPU;NVPTX" \
       -DCMAKE_BUILD_TYPE=Release \
       -G "Unix Makefiles" \
       -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
-      -DCLANG_OPENMP_NVPTX_DEFAULT_ARCH=sm_75 \
-      -DLIBOMPTARGET_NVPTX_COMPUTE_CAPABILITIES=75 \
+      -DLIBOMPTARGET_DEVICE_ARCHITECTURES="all" \
+      -DLIBOMPTARGET_ENABLE_DEBUG=0 \
       ../llvm
 make -j$(nproc) || exit 1
 make -j$(nproc) install || exit 1
@@ -54,4 +54,4 @@ cd ..
 
 # clean working directory
 cd ../../
-rm -rf $WORKING_DIR
+#rm -rf $WORKING_DIR
