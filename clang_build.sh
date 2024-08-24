@@ -1,15 +1,15 @@
 #!/bin/sh
 # Build Clang with support for OpenMP offloading to NVIDIA and AMD GPUs.
 
-WORKING_DIR=$HOME/ompoffload/.llvm18
-INSTALL_DIR=$HOME/ompoffload/llvm18
+WORKING_DIR=$HOME/ompoffload/.llvm19
+INSTALL_DIR=$HOME/ompoffload/llvm19
 
 mkdir -p $WORKING_DIR
 cd $WORKING_DIR
 
 # find the latest clang releases here: https://github.com/llvm/llvm-project/releases
-# latest clang-18 release of clang...
-git clone -b release/18.x --depth 1 https://github.com/llvm/llvm-project.git
+# latest clang-19 release of clang...
+git clone -b release/19.x --depth 1 https://github.com/llvm/llvm-project.git
 cd llvm-project
 
 # specific release of clang
@@ -24,7 +24,8 @@ cd llvm-project
 
 mkdir build
 cd build
-cmake -DLLVM_ENABLE_PROJECTS="clang;lld;openmp" \
+cmake -DLLVM_ENABLE_PROJECTS="clang;lld" \
+      -DLLVM_ENABLE_RUNTIMES="openmp;offload" \
       -DLLVM_TARGETS_TO_BUILD="host;AMDGPU;NVPTX" \
       -DCMAKE_BUILD_TYPE=Release \
       -G "Unix Makefiles" \
@@ -40,7 +41,8 @@ mkdir build2
 cd build2
 CC=../build/bin/clang \
 CXX=../build/bin/clang++ \
-cmake -DLLVM_ENABLE_PROJECTS="clang;lld;openmp" \
+cmake -DLLVM_ENABLE_PROJECTS="clang;lld" \
+      -DLLVM_ENABLE_RUNTIMES="openmp;offload" \
       -DLLVM_TARGETS_TO_BUILD="host;AMDGPU;NVPTX" \
       -DCMAKE_BUILD_TYPE=Release \
       -G "Unix Makefiles" \
